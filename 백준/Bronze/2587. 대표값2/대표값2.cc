@@ -1,26 +1,21 @@
-#include <iostream>
 #include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <vector>
-#define fio ios_base::sync_with_stdio(0), cin.tie(0)
+#include <iostream>
+
 using namespace std;
 
-int main(void)
-{
-	int num[5];
-	int sum = 0;
-	for (int i = 0; i < 5; i++) {
-		cin >> num[i];
-	}
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int arr[5];
+  int sum = 0;
+  for (int i = 0; i < 5; i++) {
+    int num;
+    cin >> num;
+    sum += num;
+    arr[i] = num;
+  }
+  sort(arr, arr + 5);
+  cout << sum / 5 << "\n" << arr[2];
 
-	sort(num, num + 5);
-
-	for (int i = 0; i < 5; i++) {
-		sum += num[i];
-	}
-
-	cout << int(sum / 5) << endl << num[2];
-	return 0;
+  return 0;
 }
