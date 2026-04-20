@@ -1,36 +1,22 @@
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <vector>
-#define fio ios_base::sync_with_stdio(0), cin.tie(0)
+#include <bits/stdc++.h>
 using namespace std;
 
-int main(void) {
-	int i_num;
-	string num;
-	int set[10] = { 0 };
-	int max = 0;
+int num[10];
+int max_num = 0;
 
-	cin >> num;
+int main() {
+  int room_num;
+  cin >> room_num;
+  while (room_num > 0) {
+    num[room_num % 10]++;
+    room_num /= 10;
+  }
+  int overlap = (num[6] + num[9] + 1) / 2;
+  num[6] = overlap;
+  num[9] = overlap;
 
-	for (int i = 0; i < num.length(); i++) {
-		set[num[i] - '0']++;
-	}
+  for (int i = 0; i < 10; i++) max_num = max(num[i], max_num);
 
-	double reverse = (set[9] + set[6]) / 2.;
-
-	set[9] = round(reverse);
-	set[6] = 0;
-
-	for (int i = 0; i < 10; i++) {
-		if (max < set[i]) {
-			max = set[i];
-		}
-	}
-
-	cout << max;
-
-	return 0;
+  cout << max_num;
+  return 0;
 }
