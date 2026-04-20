@@ -1,41 +1,25 @@
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <vector>
-#define fio ios_base::sync_with_stdio(0), cin.tie(0)
+#include <bits/stdc++.h>
 using namespace std;
 
-int num[1000001] = { 0 };
-int sum[2000001] = { 0 };
+int students[2][7];
+int N, K;
+int min_room = 0;
+int main() {
+  cin >> N;
+  cin >> K;
+  for (int i = 0; i < N; i++) {
+    int gender, grade;
+    cin >> gender;
+    cin >> grade;
+    students[gender][grade]++;
+  }
 
-int main(void) {
-	int N, K, grade, gender;
-	int count = 0; 
-	int student[2][6] = { 0 };
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 7; j++) {
+      if (students[i][j] > 0) min_room += (students[i][j] + K - 1) / K;
+    }
+  }
 
-	cin >> N >> K;
-
-	for (int i = 0; i < N; i++) {
-		cin >> gender >> grade;
-		student[gender][grade - 1]++;
-	}
-
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 6; j++) {
-			if (student[i][j] > 0) {
-				if (student[i][j] % K) {
-					count += student[i][j] / K + 1;
-				}
-				else {
-					count += student[i][j] / K;
-				}
-			}
-		}
-	}
-
-	cout << count;
-	
-	return 0;
+  cout << min_room;
+  return 0;
 }
