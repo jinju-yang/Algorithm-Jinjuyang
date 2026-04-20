@@ -1,41 +1,31 @@
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <vector>
-#define fio ios_base::sync_with_stdio(0), cin.tie(0)
+#include <bits/stdc++.h>
 using namespace std;
 
+int N;
+int alphabet[27];
 
-int main(void) {
-	string first, second;
-	int N;
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  cin >> N;
+  for (int i = 0; i < N; i++) {
+    int sum = 0;
+    int flag = 0;
+    string word;
+    cin >> word;
+    for (auto c : word) alphabet[c - 'a']++;
+    string strfry;
+    cin >> strfry;
 
-	cin >> N;
-	for (int i = 0; i < N; i++) {
-		int count = 0;
-		int word[2][26] = { 0 };
-		cin >> first >> second;
-
-		for (int j = 0; j < first.length(); j++) {
-			word[0][(int)first[j] - 'a']++;
-		}
-
-		for (int j = 0; j < second.length(); j++) {
-			word[1][second[j] - 'a']++;
-		}
-
-		for (int j = 0; j < 26; j++) {
-			count += abs(word[0][j] - word[1][j]);
-		}
-
-		if (count) {
-			cout << "Impossible " << "\n";
-		}
-		else {
-			cout << "Possible" << "\n";
-		}
-	}
-	return 0;
+    for (auto c : strfry) alphabet[c - 'a']--;
+    for (int j = 0; j < 27; j++) {
+      if (alphabet[j]) flag = 1;
+      alphabet[j] = 0;
+    }
+    if (!flag)
+      cout << "Possible\n";
+    else
+      cout << "Impossible\n";
+  }
+  return 0;
 }
